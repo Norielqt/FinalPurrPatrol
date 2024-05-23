@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+class ImageUploadService {
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> uploadImageAndSaveData(String description) async {
+    // Pick an image
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    // Upload image to Firebase Storage
+    String imageUrl = await uploadImage(image);
+
+    // Save data to Firestore
+    await saveDataToFirestore(imageUrl, description);
+  }
+
+  Future<String> uploadImage(XFile image) async {
+    final storageRef = FirebaseStorage.instance.ref().child('images/${image.name}');
+    final uploadTask = storageRef.putFile(File(image.path));
+    final snapshot = await uploadTask.whenComplete(() => null);
+    return await snapshot.ref.getDownloadURL();
+  }
+
+  Future<void> saveDataToFirestore(String imageUrl, String description) async {
+    CollectionReference imagesRef = FirebaseFirestore.instance.collection('images');
+    await imagesRef.add({
+      'imageUrl': imageUrl,
+      'description': description,
+    });
+  }
+}

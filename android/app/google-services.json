@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431814770090",
+    "project_id": "purr-patrol",
+    "storage_bucket": "purr-patrol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431814770090:android:8616f9e964bb23b5307fd3",
+        "android_client_info": {
+          "package_name": "com.example.purrpatrol"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcef_6dR2pNdPE3eUYZR5cPsxEeyRgnGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
