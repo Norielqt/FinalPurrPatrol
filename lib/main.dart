@@ -28,6 +28,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Purr Patrol App',
+      debugShowCheckedModeBanner: false,
       home: const LoginPage(),
       routes: {
         '/welcomeScreen': (BuildContext ctx) => const WelcomePage(),
