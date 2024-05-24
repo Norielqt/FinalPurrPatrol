@@ -614,7 +614,7 @@ Widget build(BuildContext context) {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: Text('Great Job!'),
-                                        content: Text('Thank You for finding this dog!'),
+                                        content: Text('Thank You for finding this pet!'),
                                         actions: <Widget>[
                                           TextButton(
                                             child: Text('OK'),

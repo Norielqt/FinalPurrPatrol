@@ -77,10 +77,10 @@ class _MyFormState extends State<MyForm> {
     String type;
 
     if (_titleController.text.contains('Dog')) {
-      type = 'https://scontent.fklo1-1.fna.fbcdn.net/v/t1.15752-9/344282563_693059255956988_5504602844254965475_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHVCKGdcGiZxEcuj_pYnyI5BV1Ay3i_DwUFXUDLeL8PBYG2L12mq-dxnIr6Aki8TtflmwUP58gqeVOlp6Yhb85t&_nc_ohc=rUhq0vZDP8EQ7kNvgHvd0kD&_nc_ht=scontent.fklo1-1.fna&oh=03_Q7cD1QHRGLlmymNkS9HBdvdepOP_uThdgELzdrxv8yv1SzOgrw&oe=66771810';
+      type = 'https://scontent.fceb2-2.fna.fbcdn.net/v/t1.15752-9/444761550_413314671600098_3271622928308436790_n.png?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGXY29nVl7EI4Kq0yUT6gEUuEwvvOMsfU64TC-84yx9TkA4MOX3LA9_nwIb8ZBtGVVPcmVixlIZ0mBcYinfE_jf&_nc_ohc=cjmCXzMBXs8Q7kNvgFZkdFq&_nc_ht=scontent.fceb2-2.fna&oh=03_Q7cD1QGvLZoh0gjhmGd3MEOMWiLL7lld5OI2Y4fCvsh-GaRFsg&oe=6677CCAE';
     }
     else{
-      type = 'https://scontent.xx.fbcdn.net/v/t1.15752-9/368062596_1045356893172705_462659872860581481_n.jpg?stp=dst-jpg_p206x206&_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeH_2_YQlZSuPscANkLoJNMcKzSolyfbZEYrNKiXJ9tkRm9D6t89eIa_R_MfaI8JET0VSvw-_Dk4iWoBzwKKzKEw&_nc_ohc=KmVKvFSKZmYQ7kNvgEnapTp&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QEzRniiRa4xf8FIp9Evz466dueUuYFZityjZGT3zWSGrQ&oe=66773489';
+      type = 'https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/444760945_1221425379223396_162889497798784_n.png?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEw1duUT1L4jRJalfTuLWom7MRuQGYw_1XsxG5AZjD_VdQG5F8cmCZWTfVVoHtvmF4HTLnYZdMSX3sOQWp4q7li&_nc_ohc=glXMBeiBZScQ7kNvgGI6qd-&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QEqEHLPrDaPlITXkKHP6DDJHYTLCoTuNpuzjhFrnK4T1w&oe=6677C03A';
     }
 
     CollectionReference pets = _firestore.collection('pets');
