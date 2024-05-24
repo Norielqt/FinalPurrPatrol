@@ -41,11 +41,7 @@ class MyListPage extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => const HomeScreen()));
               }),
-              _buildHoverableDrawerItem('AddPurr', Icons.access_time, () {
-                Navigator.pop(context);
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const AddPurr()));
-              }),
+             
               _buildHoverableDrawerItem('My Reports', Icons.chat, () {
                 Navigator.pop(context);
                 Navigator.push(

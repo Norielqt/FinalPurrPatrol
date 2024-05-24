@@ -248,32 +248,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ),
-    Positioned(
-      bottom: 20,
-      right: 20,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddPurr()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(), // Circular shape
-          elevation: 8, // Add elevation
-          backgroundColor: Colors.black,
-          padding: const EdgeInsets.all(16),
-          animationDuration: Duration(milliseconds: 200), // Add animation duration
-        ),
-        child: Tooltip(
-          message: 'Add Purr', // Tooltip message
-          child: Icon(Icons.add, color: Colors.white), // Set icon color to white
-        ),
+Positioned(
+  bottom: 20,
+  right: 20,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AddPurr()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      elevation: 8, // Add elevation
+      backgroundColor: Colors.transparent, // Set background color to transparent
+      padding: const EdgeInsets.all(16),
+      animationDuration: Duration(milliseconds: 200), // Add animation duration
+    ),
+    child: Tooltip(
+      message: 'Add Purr', // Tooltip message
+      child: Image.network(
+        'https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/444760936_2568711256636266_3770809278884060508_n.png?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGSqgNTS8McUYXrM6aEH-6FENL1s5OaassQ0vWzk5pqy9FfWI7DyVrxZTboZitc4yDpZPbaijuJSMx9fqiKHYVz&_nc_ohc=Eh-QuNA-VSEQ7kNvgGrT2z2&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QEfSdAc70CORHbd393wn0LcqIwQjNGMUgfq2UgVpWjRYA&oe=6677D7B1',
+        fit: BoxFit.cover,
+        width: 60,
+        height:60,
       ),
     ),
+  ),
+),
   ],
 ),
-
     );
   }
 Widget _buildHoverableDrawerItem(
@@ -305,14 +308,6 @@ Widget _buildHoverableDrawerItem(
   }
 }
 
-  
-
-
- 
-
-
-
-
 
 
 class ItemWidget2 extends StatelessWidget {
@@ -338,6 +333,8 @@ class ItemWidget2 extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[200], // Background color
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Color(0xFF6E6C33)), // Adding the border here
+
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start, // Align children to the top
@@ -445,7 +442,7 @@ class _ResultPageState extends State<ResultPage> {
             children: [
               Text(widget.phone, textAlign: TextAlign.center),
               Image.network(
-                'https://scontent.xx.fbcdn.net/v/t1.15752-9/444759941_432066073019707_1643882413514114918_n.png?stp=dst-png_p403x403&_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeE3FGyDlguHdvxc40Vb5dbbKV-M57dcyaApX4znt1zJoKcAnZPUAcdRwcBk0qIMHsN0TY0ARlVwWNbCbRaYu343&_nc_ohc=RMFw_SLpKtkQ7kNvgHZk-zj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QG5hNI2FlSQYhHy21-TPIPZ62VR8ouEf9ZSWKkg4BTdOA&oe=66779C27',
+                'https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/444761537_855867266373665_6364064846820461512_n.png?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEArU8RGZOjztS4BdKiTxAhlNGqszddrl6U0aqzN12uXuvKAmGHcbbByyfsSa8PkMggJ_wW4Gc2_H83Lo-7H7nq&_nc_ohc=IKgoZrGgusIQ7kNvgEF_WWB&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QFdkpZKgNEcomyi7MZIh-WZATTYKXTh9qGt7qpcQiRRuQ&oe=6677F0EB',
                 height: 150,
                 width: 150,
               ),
@@ -453,7 +450,7 @@ class _ResultPageState extends State<ResultPage> {
               onPressed: () {
                       Navigator.of(context).pop();
               },
-              icon: const Icon(Icons.call_end, color:  Colors.red),
+              icon: const Icon(Icons.call_end, color:  Colors.black),
               iconSize: 40,
             ),
             ],
@@ -462,6 +459,8 @@ class _ResultPageState extends State<ResultPage> {
       },
     );
   }
+
+
 @override
 Widget build(BuildContext context) {
   return Scaffold(
