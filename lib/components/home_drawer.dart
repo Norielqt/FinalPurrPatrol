@@ -224,6 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 location: pets[index]['location'],
                                 breed: pets[index]['breed'],
                                 sex: pets[index]['sex'],
+                                phone: pets[index]['phone']
                               ),
                             ),
                           );
@@ -397,6 +398,7 @@ class ResultPage extends StatefulWidget {
   final String location;
   final String breed;
   final String sex;
+  final String phone;
 
   const ResultPage({
     required this.id,
@@ -408,6 +410,7 @@ class ResultPage extends StatefulWidget {
     required this.location,
     required this.breed,
     required this.sex,
+    required this.phone,
     Key? key,
   }) : super(key: key);
 
@@ -440,6 +443,7 @@ class _ResultPageState extends State<ResultPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Text(widget.phone, textAlign: TextAlign.center),
               Image.network(
                 'https://scontent.xx.fbcdn.net/v/t1.15752-9/444759941_432066073019707_1643882413514114918_n.png?stp=dst-png_p403x403&_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeE3FGyDlguHdvxc40Vb5dbbKV-M57dcyaApX4znt1zJoKcAnZPUAcdRwcBk0qIMHsN0TY0ARlVwWNbCbRaYu343&_nc_ohc=RMFw_SLpKtkQ7kNvgHZk-zj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QG5hNI2FlSQYhHy21-TPIPZ62VR8ouEf9ZSWKkg4BTdOA&oe=66779C27',
                 height: 150,
