@@ -157,12 +157,12 @@ class _MyFormState extends State<MyForm> {
           'Add Purr',
           style: TextStyle(color: Colors.black,),
         ),
-        backgroundColor:  Colors.white,
+        backgroundColor:  Color(0xFFFFF96B),
       ),
      
        drawer: Drawer(
         child: Container(
-           color: Color(0xFFFFF96B),
+           color: const Color(0xFFFFF96B),
           child: ListView(
             children: <Widget>[
               Container(
