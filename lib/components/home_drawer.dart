@@ -502,11 +502,11 @@ Widget build(BuildContext context) {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      widget.subtitleText,
+                    'Weight: ${widget.subtitleText} kgs',
                       style: const TextStyle(fontSize: 18),
                     ),
                     Text(
-                      widget.additionalText,
+                    'Color: ${widget.additionalText}',
                       style: const TextStyle(fontSize: 18),
                     ),
                     const SizedBox(height: 20),
