@@ -397,7 +397,7 @@ class _ResultPageState extends State<ResultPage> {
               onPressed: () {
                       Navigator.of(context).pop();
               },
-              icon: const Icon(Icons.call_end, color: Colors.red),
+              icon: const Icon(Icons.call_end, color:  Colors.red),
               iconSize: 40,
             ),
             ],
@@ -406,151 +406,157 @@ class _ResultPageState extends State<ResultPage> {
       },
     );
   }
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor:  Color(0xFFFFF96B), // Changed background color to yellow
+    appBar: AppBar(title: const Text('Result')),
+    body: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+         Padding(
+  padding: const EdgeInsets.only(top: 20.0),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Image.network(
+      widget.imageUrl,
+      width: 250,
+      height: 250,
+      alignment: Alignment.center,
+    ),
+  ),
+),
 
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Result')),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.network(
-              widget.imageUrl,
-              fit: BoxFit.contain,
-              height: 250,
-              width: 400,
-            ), 
-            
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.headerText,
-                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        widget.subtitleText,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        widget.additionalText,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(height: 20),
-                      const Divider(),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Date Lost: ${widget.dateLost}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Location: ${widget.location}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Breed: ${widget.breed}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Sex: ${widget.sex}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 20),
-                      const Divider(),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: MouseRegion(
-                              onEnter: (_) {
-                                setState(() {
-                                  isCallHovered = true;
-                                });
-                              },
-                              onExit: (_) {
-                                setState(() {
-                                  isCallHovered = false;
-                                });
-                              },
-                             child: ElevatedButton(
-                                onPressed: _callOwner,
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: isCallHovered ? Colors.white : const Color(0xFF121212), backgroundColor: isCallHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
-                                  padding: const EdgeInsets.symmetric(vertical: 15),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.call, color: isCallHovered ? Colors.white : const Color(0xFF121212)),
-                                    const SizedBox(width: 10),
-                                    Text('Call', style: TextStyle(color: isCallHovered ? Colors.white : const Color(0xFF121212))),
-                                  ],
-                                ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.headerText,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.subtitleText,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      widget.additionalText,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(height: 20),
+                    const Divider(),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Date Lost: ${widget.dateLost}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Location: ${widget.location}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Breed: ${widget.breed}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Sex: ${widget.sex}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 20),
+                    const Divider(),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: MouseRegion(
+                            onEnter: (_) {
+                              setState(() {
+                                isCallHovered = true;
+                              });
+                            },
+                            onExit: (_) {
+                              setState(() {
+                                isCallHovered = false;
+                              });
+                            },
+                            child: ElevatedButton(
+                              onPressed: _callOwner,
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: isCallHovered ? Colors.white : const Color(0xFF121212),
+                                backgroundColor: isCallHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.call, color: isCallHovered ? Colors.white : const Color(0xFF121212)),
+                                  const SizedBox(width: 10),
+                                  Text('Call', style: TextStyle(color: isCallHovered ? Colors.white : const Color(0xFF121212))),
+                                ],
                               ),
                             ),
                           ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: MouseRegion(
-                              onEnter: (_) {
-                                setState(() {
-                                  isMarkAsFoundHovered = true;
-                                });
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: MouseRegion(
+                            onEnter: (_) {
+                              setState(() {
+                                isMarkAsFoundHovered = true;
+                              });
+                            },
+                            onExit: (_) {
+                              setState(() {
+                                isMarkAsFoundHovered = false;
+                              });
+                            },
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Mark as found button functionality
                               },
-                              onExit: (_) {
-                                setState(() {
-                                  isMarkAsFoundHovered = false;
-                                });
-                              },
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Mark as found button functionality
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212), backgroundColor: isMarkAsFoundHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
-                                  padding: const EdgeInsets.symmetric(vertical: 15),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.done, color: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212)),
-                                    const SizedBox(width: 10),
-                                    Text('Mark as Found', style: TextStyle(color: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212))),
-                                  ],
-                                ),
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212),
+                                backgroundColor: isMarkAsFoundHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.done, color: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212)),
+                                  const SizedBox(width: 10),
+                                  Text('Mark as Found', style: TextStyle(color: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212))),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
