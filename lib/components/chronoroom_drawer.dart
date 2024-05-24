@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:purrpatrol/components/home_drawer.dart';
 import 'package:purrpatrol/screens/loginscreen.dart';
-import 'package:purrpatrol/components/calebot_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -235,7 +233,7 @@ class _MyFormState extends State<MyForm> {
             TextField(
               controller: _dateController,
               decoration: InputDecoration(
-                labelText: "Enter Date",
+                labelText: "Select Date",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),

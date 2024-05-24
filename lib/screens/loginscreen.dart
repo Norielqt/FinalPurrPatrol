@@ -1,10 +1,7 @@
-// ignore_for_file: avoid_print, duplicate_ignore, deprecated_member_use
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:purrpatrol/components/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:purrpatrol/screens/signupscreen.dart';
-
 import '../firebase_auth_implementation/firebase_auth.services.dart';
 
 void main() {
@@ -195,13 +192,13 @@ class _LoginPageState extends State<LoginPage>{
             child: SizedBox(
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
-                // onPressed: _signIn,
+                // onPressed: () {
+                //   Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => const HomeScreen()),
+                //   );
+                // },
+                onPressed: _signIn,
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: const Color(0xFF121212),
                   shape: RoundedRectangleBorder(

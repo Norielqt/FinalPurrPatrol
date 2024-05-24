@@ -4,16 +4,15 @@ import 'package:purrpatrol/screens/loginscreen.dart';
 import 'package:purrpatrol/screens/welcomescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:purrpatrol/components/home_drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb){
-    await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyD-Q2XTKS0EIxpX79_M_xzIhxzQqaurxVQ", 
+  await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyD-Q2XTKS0EIxpX79_M_xzIhxzQqaurxVQ", 
                                                           appId: "1:431814770090:web:352087a06cd9f96b307fd3", 
                                                           messagingSenderId: "431814770090", 
                                                           projectId: "purr-patrol"));
-  }
   
   runApp(const MainApp());
 }

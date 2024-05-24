@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:purrpatrol/components/chronoroom_drawer.dart';
 import 'package:purrpatrol/screens/loginscreen.dart';
-import 'package:purrpatrol/components/calebot_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -56,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
  
 
-  int _selectedIndex = 0;
 
  @override
   Widget build(BuildContext context) {
@@ -300,12 +297,6 @@ Widget _buildHoverableDrawerItem(
       ),
     );
   }
-
-  void _selectTab(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 }
 
 
@@ -505,7 +496,7 @@ Widget build(BuildContext context) {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                    'Weight: ${widget.subtitleText} kgs',
+                    'Weight: ${widget.subtitleText}',
                       style: const TextStyle(fontSize: 18),
                     ),
                     Text(
