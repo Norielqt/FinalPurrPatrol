@@ -461,10 +461,10 @@ class _ResultPageState extends State<ResultPage> {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor:  Color(0xFFFFF96B), // Changed background color to yellow
+    backgroundColor: Colors.grey[200],
     appBar: AppBar(
       title: const Text('Result'),
-      backgroundColor: Color(0xFFFFF96B), // Change this to your desired color
+      backgroundColor:Colors.grey[200], // Change this to your desired color
       ),
     body: SingleChildScrollView(
       child: Column(
@@ -552,8 +552,8 @@ Widget build(BuildContext context) {
                             child: ElevatedButton(
                               onPressed: _callOwner,
                               style: ElevatedButton.styleFrom(
-                                foregroundColor: isCallHovered ? Colors.white : const Color(0xFF121212),
-                                backgroundColor: isCallHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
+                                foregroundColor: isCallHovered ? Color(0xFFFFF96B) : const Color(0xFF121212),
+                                backgroundColor: isCallHovered ? const Color(0xFF121212) : const Color(0xFFFFF96B),
                                 padding: const EdgeInsets.symmetric(vertical: 15),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
@@ -632,8 +632,8 @@ Widget build(BuildContext context) {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                foregroundColor: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212),
-                                backgroundColor: isMarkAsFoundHovered ? const Color(0xFF121212) : const Color(0xFFF6F6F6),
+                                foregroundColor: isMarkAsFoundHovered ? Color(0xFFFFF96B) : const Color(0xFF121212),
+                                backgroundColor: isMarkAsFoundHovered ? const Color(0xFF121212) : const Color(0xFFFFF96B),
                                 padding: const EdgeInsets.symmetric(vertical: 15),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),

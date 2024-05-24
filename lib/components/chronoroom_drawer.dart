@@ -79,7 +79,7 @@ class _MyFormState extends State<MyForm> {
     if (_titleController.text.contains('Dog')) {
       type = 'https://scontent.fceb2-2.fna.fbcdn.net/v/t1.15752-9/444761550_413314671600098_3271622928308436790_n.png?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGXY29nVl7EI4Kq0yUT6gEUuEwvvOMsfU64TC-84yx9TkA4MOX3LA9_nwIb8ZBtGVVPcmVixlIZ0mBcYinfE_jf&_nc_ohc=cjmCXzMBXs8Q7kNvgFZkdFq&_nc_ht=scontent.fceb2-2.fna&oh=03_Q7cD1QGvLZoh0gjhmGd3MEOMWiLL7lld5OI2Y4fCvsh-GaRFsg&oe=6677CCAE';
     }
-    else{
+    else {
       type = 'https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/444760945_1221425379223396_162889497798784_n.png?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEw1duUT1L4jRJalfTuLWom7MRuQGYw_1XsxG5AZjD_VdQG5F8cmCZWTfVVoHtvmF4HTLnYZdMSX3sOQWp4q7li&_nc_ohc=glXMBeiBZScQ7kNvgGI6qd-&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QEqEHLPrDaPlITXkKHP6DDJHYTLCoTuNpuzjhFrnK4T1w&oe=6677C03A';
     }
 
@@ -100,7 +100,7 @@ class _MyFormState extends State<MyForm> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Pet Added'),
-            content: Text('Pet added successfully!'),
+            content: Text('Report added successfully!'),
             actions: <Widget>[
               TextButton(
                 child: Text('OK'),
