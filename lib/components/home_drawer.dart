@@ -34,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<Map<String, dynamic>> pets = [];
     for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-      pets.add(doc.data() as Map<String, dynamic>);
+      Map<String, dynamic> petData = doc.data() as Map<String, dynamic>;
+      petData['id'] = doc.id; // Add the document ID to the pet data
+      pets.add(petData);
     }
 
     return pets;
@@ -214,6 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ResultPage(
+                                      id: pets[index]['id'],
                                       imageUrl: pets[index]['type'],
                                       headerText: pets[index]['title'],
                                       subtitleText: pets[index]['weight'],
@@ -348,6 +351,7 @@ class ItemWidget2 extends StatelessWidget {
 }
 
 class ResultPage extends StatefulWidget {
+  final String id;
   final String imageUrl;
   final String headerText;
   final String subtitleText;
@@ -358,6 +362,7 @@ class ResultPage extends StatefulWidget {
   final String sex;
 
   const ResultPage({
+    required this.id,
     required this.imageUrl,
     required this.headerText,
     required this.subtitleText,
@@ -376,6 +381,16 @@ class ResultPage extends StatefulWidget {
 class _ResultPageState extends State<ResultPage> {
   bool isCallHovered = false;
   bool isMarkAsFoundHovered = false;
+
+  Future<void> deletePet(String id) async {
+  try {
+    await FirebaseFirestore.instance.collection('pets').doc(id).delete();
+    print('Pet deleted successfully.');
+  } catch (e) {
+    print('Error deleting pet: $e');
+    throw e;
+  }
+}
 
  void _callOwner() {
     showDialog(
@@ -527,8 +542,54 @@ Widget build(BuildContext context) {
                               });
                             },
                             child: ElevatedButton(
-                              onPressed: () {
-                                // Mark as found button functionality
+                              onPressed: () async {
+                                bool? confirmDelete = await showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Confirmation'),
+                                      content: Text('Are you sure you found the pet?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, false);
+                                          },
+                                          child: Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                          child: Text('Delete'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+
+                                if (confirmDelete == true) {
+                                  await deletePet(widget.id);
+                                   showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('Successful'),
+                                        content: Text('Thank You for finding this dog!'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text('OK'),
+                                            onPressed: () {
+                                              // Dismiss the dialog and then navigate
+                                              Navigator.of(context).pop();
+                                              Navigator.pushNamed(context, "/homeScreen");
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  print("User is successfully created");
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: isMarkAsFoundHovered ? Colors.white : const Color(0xFF121212),
@@ -545,6 +606,7 @@ Widget build(BuildContext context) {
                                 ],
                               ),
                             ),
+
                           ),
                         ),
                       ],
