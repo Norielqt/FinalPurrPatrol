@@ -135,51 +135,122 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: petsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            List<Map<String, dynamic>> pets = snapshot.data!;
-            return ListView.builder(
-              itemCount: pets.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResultPage(
-                          imageUrl: pets[index]['type'], 
-                          headerText: pets[index]['title'],
-                          subtitleText: pets[index]['weight'],
-                          additionalText: pets[index]['color'],
-                          dateLost: pets[index]['date'],
-                          location: pets[index]['location'],
-                          breed: pets[index]['breed'],
-                          sex: pets[index]['sex'],
-                        ),
-                      ),
-                    );
-                  },
-                  child: ItemWidget2(
-                    imageUrl: pets[index]['type'], // Placeholder image URL
-                    headerText: pets[index]['title'], // Placeholder text until data is fetched
-                    subtitleText: pets[index]['weight'],
-                    additionalText: pets[index]['color'],
+       body: Stack(
+        children: [
+          Container(
+            color: const Color(0xFFFFF96B),
+          ),
+          const Positioned(
+            top: 20,
+            left: 10,
+            right:255,
+            child: Column(
+              children: [
+                Text(
+                  "Let's find your pet...",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF121212),
                   ),
-                );
-              },
-            );
-          }
-        },
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 60,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE7E7E7),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  ),
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              margin: const EdgeInsets.only(top: 180),
+              decoration: const BoxDecoration(
+                color:  Color(0xFFFFF96B),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: petsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    List<Map<String, dynamic>> pets = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: pets.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultPage(
+                                      imageUrl: pets[index]['type'],
+                                      headerText: pets[index]['title'],
+                                      subtitleText: pets[index]['weight'],
+                                      additionalText: pets[index]['color'],
+                                      dateLost: pets[index]['date'],
+                                      location: pets[index]['location'],
+                                      breed: pets[index]['breed'],
+                                      sex: pets[index]['sex'],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: ItemWidget2(
+                                imageUrl: pets[index]['type'],
+                                headerText: pets[index]['title'],
+                                subtitleText: pets[index]['weight'],
+                                additionalText: pets[index]['color'],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.transparent,
+                            ), // Add a divider between items
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
   Widget _buildHoverableDrawerItem(
       String title, IconData icon, VoidCallback onTap) {
     return MouseRegion(
