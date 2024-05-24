@@ -5,6 +5,8 @@ import 'package:purrpatrol/screens/loginscreen.dart';
 import 'package:purrpatrol/components/calebot_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -12,12 +14,9 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-
-
-
 class _HomeScreenState extends State<HomeScreen> {
-
   late Future<List<Map<String, dynamic>>> petsFuture;
+  String searchQuery = '';
 
   @override
   void initState() {
@@ -39,6 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
       pets.add(petData);
     }
 
+    // Apply search filter
+    if (searchQuery.isNotEmpty) {
+      pets = pets.where((pet) {
+        // Filter based on the 'title' field
+        return pet['title'].toLowerCase().contains(searchQuery.toLowerCase());
+      }).toList();
+    }
+
     return pets;
   } catch (e) {
     print('Error fetching pets: $e');
@@ -46,9 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-  
 
-  @override
+ 
+
+  int _selectedIndex = 0;
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -73,35 +83,69 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 10),
             const CircleAvatar(
               radius: 15,
-              backgroundImage: NetworkImage('https://scontent.fklo1-1.fna.fbcdn.net/v/t39.30808-6/336732103_551687143482897_5025030786536306662_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGLOjdo9tsT6E6XoLnun3uOw8aqXYGglrfDxqpdgaCWt86alSzLTy8HqcZfuAHpQ2nhpncKy4XUsAuQWDCZz9l9&_nc_ohc=3zXcItAHxXwQ7kNvgEEHOAY&_nc_ht=scontent.fklo1-1.fna&oh=00_AYDiuWmRo3XWzY2--iiXkDJJG9pibr4W4-JPa7qBfbQnMg&oe=66556CA6'),
+              backgroundImage: NetworkImage(
+                  'https://scontent.fklo1-1.fna.fbcdn.net/v/t39.30808-6/336732103_551687143482897_5025030786536306662_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGLOjdo9tsT6E6XoLnun3uOw8aqXYGglrfDxqpdgaCWt86alSzLTy8HqcZfuAHpQ2nhpncKy4XUsAuQWDCZz9l9&_nc_ohc=3zXcItAHxXwQ7kNvgEEHOAY&_nc_ht=scontent.fklo1-1.fna&oh=00_AYDiuWmRo3XWzY2--iiXkDJJG9pibr4W4-JPa7qBfbQnMg&oe=66556CA6'),
             ),
             const SizedBox(width: 25),
           ],
         ),
       ),
-      body: Stack(
+       drawer: Drawer(
+        child: Container(
+           color: Color(0xFFFFF96B),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                height: 80,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                   color: Color(0xFFFFF96B),
+                ),
+                child: const Text(
+                  'Purr Patrol',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              _buildHoverableDrawerItem('Home', Icons.home, () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+              }),
+              _buildHoverableDrawerItem('Logout', Icons.exit_to_app, () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const LoginPage()));
+              }),
+            ],
+          ),
+        ),
+      ),
+    body: Stack(
   children: [
     Container(
       color: const Color(0xFFFFF96B),
     ),
     const Positioned(
-      top: 20,
-      left: 10,
-      right: 255,
-      child: Column(
-        children: [
-          Text(
-            "Let's find your pet...",
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF121212),
+            top: 20,
+            left: 10,
+            right: 290,
+            child: Column(
+              children: [
+                Text(
+                  "Let's find your pet...",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF121212),
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
             ),
           ),
-          SizedBox(height: 20),
-        ],
-      ),
-    ),
     Positioned(
       top: 60,
       left: 0,
@@ -113,7 +157,14 @@ class _HomeScreenState extends State<HomeScreen> {
             color: const Color(0xFFE7E7E7),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: const TextField(
+          child: TextField(
+            onChanged: (value) {
+              setState(() {
+                searchQuery = value;
+                // Update petsFuture with the new search query
+                petsFuture = fetchPetsFromFirestore();
+              });
+            },
             decoration: InputDecoration(
               hintText: 'Search...',
               border: InputBorder.none,
@@ -147,6 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
               List<Map<String, dynamic>> pets = snapshot.data!;
+              // Filter pets based on searchQuery
+              if (searchQuery.isNotEmpty) {
+                pets = pets.where((pet) {
+                  return pet['title'].toLowerCase().contains(searchQuery.toLowerCase());
+                }).toList();
+              }
               return ListView.builder(
                 itemCount: pets.length,
                 itemBuilder: (context, index) {
@@ -214,10 +271,46 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     ),
   ],
+),
+
+    );
+  }
+Widget _buildHoverableDrawerItem(
+      String title, IconData icon, VoidCallback onTap) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          color: Colors.transparent,
+          child: ListTile(
+            title: Row(
+              children: [
+                Icon(icon, color: const Color(0xFF121212)),
+                const SizedBox(width: 16),
+                Text(title, style: const TextStyle(color: Color(0xFF121212))),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
+
+  void _selectTab(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 }
+
+  
+
+
+ 
+
+
+
 
 
 

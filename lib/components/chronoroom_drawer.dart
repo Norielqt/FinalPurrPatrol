@@ -159,6 +159,40 @@ class _MyFormState extends State<MyForm> {
         ),
         backgroundColor:  Colors.white,
       ),
+     
+       drawer: Drawer(
+        child: Container(
+           color: Color(0xFFFFF96B),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                height: 80,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                   color: Color(0xFFFFF96B),
+                ),
+                child: const Text(
+                  'Purr Patrol',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              _buildHoverableDrawerItem('Home', Icons.home, () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+              }),
+              _buildHoverableDrawerItem('Logout', Icons.exit_to_app, () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const LoginPage()));
+              }),
+            ],
+          ),
+        ),
+      ),
    body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -346,6 +380,26 @@ class _MyFormState extends State<MyForm> {
   }
 
   
+  Widget _buildHoverableDrawerItem(String title, IconData icon, VoidCallback onTap) {
+  return MouseRegion(
+    cursor: SystemMouseCursors.click,
+    child: InkWell(
+      onTap: onTap,
+      child: Container(
+        color: Colors.transparent,
+        child: ListTile(
+          title: Row(
+            children: [
+              Icon(icon, color: Colors.black,),
+              const SizedBox(width: 16),
+              Text(title, style: const TextStyle(color: Colors.black,)),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
 
   void _selectTab(int index) {
     setState(() {
