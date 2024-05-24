@@ -198,36 +198,7 @@ class _MyFormState extends State<MyForm> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              GestureDetector(
-                onTap: _pickImage,
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Stack(
-                    children: [
-                      if (_image != null)
-                        Image.file(
-                          File(_image!.path),
-                          fit: BoxFit.cover,
-                          width: double.infinity, // Ensures the image covers the entire container
-                          height: 200, // Ensures the image height matches the container height
-                        ),
-                      const Center(
-                        child: Text(
-                          'Add a photo (optional)',
-                          style: TextStyle(
-                            color: Colors.black, // Adjust color for better visibility
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+             
               const SizedBox(height: 16),
               TextField(
                 controller: _titleController,
@@ -356,22 +327,29 @@ class _MyFormState extends State<MyForm> {
               ),
 
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _addData,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text('Post'),
-                ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize:const Size(100, 30),
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black,
-                  textStyle: const TextStyle(fontSize: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
+             ElevatedButton(
+  onPressed: _addData,
+  style: ElevatedButton.styleFrom(
+    minimumSize: const Size(100, 30),
+    foregroundColor: Colors.white,
+    backgroundColor: Colors.black,
+    textStyle: const TextStyle(fontSize: 16),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: const <Widget>[
+      Icon(Icons.add), // Icon you want to add
+      SizedBox(width: 8), // Adjust the space between icon and text
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.0),
+        child: Text('Post'),
+      ),
+    ],
+  ),
+),
             ],
           ),
         ),

@@ -441,9 +441,9 @@ class _ResultPageState extends State<ResultPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.network(
-                'https://scontent.xx.fbcdn.net/v/t1.15752-9/441083894_416066551184552_3073040650696970110_n.png?stp=dst-png_p206x206&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEfyWiwY2nsaVx-cgDMeNrZo5TAuuCnWoKjlMC64KdagnnNB4A5UzSYH3RKCrbAyWmql19lthjMbWQNEhkeZQW_&_nc_ohc=4L8DGPa14nEQ7kNvgFTyH8-&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QGBIM4Tb0xkmAlRysJsSS7fbkM77KgjC9bNeTL-fqjzFw&oe=666968C3',
-                height: 200,
-                width: 200,
+                'https://scontent.xx.fbcdn.net/v/t1.15752-9/444759941_432066073019707_1643882413514114918_n.png?stp=dst-png_p403x403&_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeE3FGyDlguHdvxc40Vb5dbbKV-M57dcyaApX4znt1zJoKcAnZPUAcdRwcBk0qIMHsN0TY0ARlVwWNbCbRaYu343&_nc_ohc=RMFw_SLpKtkQ7kNvgHZk-zj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QG5hNI2FlSQYhHy21-TPIPZ62VR8ouEf9ZSWKkg4BTdOA&oe=66779C27',
+                height: 150,
+                width: 150,
               ),
                IconButton(
               onPressed: () {
