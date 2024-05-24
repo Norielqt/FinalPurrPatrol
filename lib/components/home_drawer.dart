@@ -332,6 +332,8 @@ class ItemWidget2 extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[200], // Background color
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Color(0xFF6E6C33)), // Adding the border here
+
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start, // Align children to the top
