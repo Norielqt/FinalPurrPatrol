@@ -79,202 +79,146 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      drawer: Drawer(
+      body: Stack(
+  children: [
+    Container(
+      color: const Color(0xFFFFF96B),
+    ),
+    const Positioned(
+      top: 20,
+      left: 10,
+      right: 255,
+      child: Column(
+        children: [
+          Text(
+            "Let's find your pet...",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF121212),
+            ),
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
+    ),
+    Positioned(
+      top: 60,
+      left: 0,
+      right: 0,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
         child: Container(
-          color: const Color(0xFFFFF96B),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFFF96B),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Purr Patrol',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ),
-              _buildHoverableDrawerItem('Home', Icons.home, () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                );
-              }),
-              _buildHoverableDrawerItem('Add Purr', Icons.access_time, () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddPurr()),
-                );
-              }),
-              _buildHoverableDrawerItem('My Reports', Icons.chat, () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyListPage()),
-                );
-              }),
-              _buildHoverableDrawerItem('Logout', Icons.exit_to_app, () async {
-                await FirebaseAuth.instance.signOut();
-                  Navigator.pop(context); 
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              }),
-            ],
+          decoration: BoxDecoration(
+            color: const Color(0xFFE7E7E7),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: const TextField(
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              border: InputBorder.none,
+              prefixIcon: Icon(Icons.search, color: Colors.grey),
+            ),
+            style: TextStyle(fontSize: 16.0),
           ),
         ),
       ),
-       body: Stack(
-        children: [
-          Container(
-            color: const Color(0xFFFFF96B),
+    ),
+    Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      child: Container(
+        margin: const EdgeInsets.only(top: 180),
+        decoration: const BoxDecoration(
+          color: Color(0xFFFFF96B),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
-          const Positioned(
-            top: 20,
-            left: 10,
-            right:255,
-            child: Column(
-              children: [
-                Text(
-                  "Let's find your pet...",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF121212),
-                  ),
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 60,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE7E7E7),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search...',
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  ),
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              margin: const EdgeInsets.only(top: 180),
-              decoration: const BoxDecoration(
-                color:  Color(0xFFFFF96B),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-              ),
-              child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: petsFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    List<Map<String, dynamic>> pets = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: pets.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ResultPage(
-                                      id: pets[index]['id'],
-                                      imageUrl: pets[index]['type'],
-                                      headerText: pets[index]['title'],
-                                      subtitleText: pets[index]['weight'],
-                                      additionalText: pets[index]['color'],
-                                      dateLost: pets[index]['date'],
-                                      location: pets[index]['location'],
-                                      breed: pets[index]['breed'],
-                                      sex: pets[index]['sex'],
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: ItemWidget2(
+        ),
+        child: FutureBuilder<List<Map<String, dynamic>>>(
+          future: petsFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              List<Map<String, dynamic>> pets = snapshot.data!;
+              return ListView.builder(
+                itemCount: pets.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultPage(
+                                id: pets[index]['id'],
                                 imageUrl: pets[index]['type'],
                                 headerText: pets[index]['title'],
                                 subtitleText: pets[index]['weight'],
                                 additionalText: pets[index]['color'],
+                                dateLost: pets[index]['date'],
+                                location: pets[index]['location'],
+                                breed: pets[index]['breed'],
+                                sex: pets[index]['sex'],
                               ),
                             ),
-                            Divider(
-                              color: Colors.transparent,
-                            ), // Add a divider between items
-                          ],
-                        );
-                      },
-                    );
-                  }
+                          );
+                        },
+                        child: ItemWidget2(
+                          imageUrl: pets[index]['type'],
+                          headerText: pets[index]['title'],
+                          subtitleText: pets[index]['weight'],
+                          additionalText: pets[index]['color'],
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                    ],
+                  );
                 },
-              ),
-            ),
-          ),
-        ],
+              );
+            }
+          },
+        ),
+      ),
+    ),
+    Positioned(
+      bottom: 20,
+      right: 20,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddPurr()),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(), // Circular shape
+          elevation: 8, // Add elevation
+          backgroundColor: Colors.black,
+          padding: const EdgeInsets.all(16),
+          animationDuration: Duration(milliseconds: 200), // Add animation duration
+        ),
+        child: Tooltip(
+          message: 'Add Purr', // Tooltip message
+          child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        ),
+      ),
+    ),
+  ],
       ),
     );
   }
 }
 
-  Widget _buildHoverableDrawerItem(
-      String title, IconData icon, VoidCallback onTap) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          color: Colors.transparent,
-          child: ListTile(
-            title: Row(
-              children: [
-                Icon(icon, color: const Color(0xFF121212)),
-                const SizedBox(width: 16),
-                Text(title, style: const TextStyle(color: Color(0xFF121212))),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
 
 class ItemWidget2 extends StatelessWidget {
@@ -425,7 +369,10 @@ class _ResultPageState extends State<ResultPage> {
 Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor:  Color(0xFFFFF96B), // Changed background color to yellow
-    appBar: AppBar(title: const Text('Result')),
+    appBar: AppBar(
+      title: const Text('Result'),
+      backgroundColor: Color(0xFFFFF96B), // Change this to your desired color
+      ),
     body: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -554,13 +501,13 @@ Widget build(BuildContext context) {
                                           onPressed: () {
                                             Navigator.pop(context, false);
                                           },
-                                          child: Text('Cancel'),
+                                          child: Text('No'),
                                         ),
                                         TextButton(
                                           onPressed: () {
                                             Navigator.pop(context, true);
                                           },
-                                          child: Text('Delete'),
+                                          child: Text('Yes'),
                                         ),
                                       ],
                                     );
@@ -573,7 +520,7 @@ Widget build(BuildContext context) {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text('Successful'),
+                                        title: Text('Great Job!'),
                                         content: Text('Thank You for finding this dog!'),
                                         actions: <Widget>[
                                           TextButton(
@@ -606,7 +553,6 @@ Widget build(BuildContext context) {
                                 ],
                               ),
                             ),
-
                           ),
                         ),
                       ],
